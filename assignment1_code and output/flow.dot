@@ -1,0 +1,20 @@
+digraph G {
+  rankdir=TB; nodesep=0.35; ranksep=0.32;
+  node [fontname="Helvetica", fontsize=11, style=filled, fillcolor="#ffffff", color="#444444"];
+  edge [fontname="Helvetica", fontsize=10, color="#444444"];
+  start [label="START", shape=oval, fillcolor="#e8e8e8"];
+  rd [label="Read litres, fat, snf", shape=parallelogram];
+  c1 [label="litres, fat, snf\nall valid numbers?", shape=diamond];
+  c2 [label="litres > 0 and\nlitres <= 200?", shape=diamond];
+  c3 [label="2.0 <= fat <= 7.0?", shape=diamond];
+  c4 [label="6.0 <= snf <= 11.0?", shape=diamond];
+  ok [label="Entry VALID\ncalculate rate and amount", shape=box, fillcolor="#e6f4ea"];
+  bad [label="Entry REJECTED\nshow reason to clerk", shape=box, fillcolor="#fce8e6"];
+  stop [label="END", shape=oval, fillcolor="#e8e8e8"];
+  start -> rd -> c1;
+  c1 -> c2 [label="Yes"]; c1 -> bad [label="No"];
+  c2 -> c3 [label="Yes"]; c2 -> bad [label="No"];
+  c3 -> c4 [label="Yes"]; c3 -> bad [label="No"];
+  c4 -> ok [label="Yes"]; c4 -> bad [label="No"];
+  ok -> stop; bad -> stop;
+}
